@@ -1,0 +1,8 @@
+name: Antykacraft
+main: fr.voydstack.antykacraft.Antykacraft
+version: 1.0
+commands:
+  faction:
+    description: Permet de discuter avec les membres de sa faction.
+    usage: /faction [message]
+    aliases: f
