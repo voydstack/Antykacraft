@@ -1,2 +1,19 @@
 antykacraft:
   factionChat: true
+  event_world: event
+  pvpbox:
+    kits:
+      disabled: []
+    shop:
+      kits:
+        Assassin: 50
+        Golem: 50
+        Bomberman: 50
+        Pirate: 50
+        Marin: 50
+        Enderman: 50
+        Chasseur: 50
+    points:
+      multiplier: 1.0
+      amount: 1
+    kitsBuyable: true

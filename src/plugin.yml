@@ -3,9 +3,12 @@ main: fr.voydstack.antykacraft.Antykacraft
 version: 1.0
 commands:
   faction:
-    description: Permet de discuter avec les membres de sa faction.
+    description: Permet de communiquer avec sa faction.
     usage: /faction [message]
     aliases: f
   ping:
     description: Permet de mesurer son temps de latence avec le serveur.
     usage: /ping [joueur]
+  pvpbox:
+    description: Permet de gerer le PvPBox.
+    usage: /pvpbox [args]

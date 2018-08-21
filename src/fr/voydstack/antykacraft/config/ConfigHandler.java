@@ -27,4 +27,13 @@ public class ConfigHandler {
 		config.set("antykacraft.factionChat", enabled);
 		Antykacraft.instance.saveConfig();
 	}
+	
+	public String getEventWorldName() {
+		return config.getString("antykacraft.event_world");
+	}
+	
+	public void setEventWorldName(String worldName) {
+		config.set("antykacraft.world_event", worldName);
+		Antykacraft.instance.saveConfig();
+	}
 }

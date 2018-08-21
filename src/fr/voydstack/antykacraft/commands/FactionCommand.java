@@ -18,26 +18,27 @@ public class FactionCommand implements CommandExecutor {
 			Player player = (Player) sender;
 			if(player.hasPermission("antykacraft.faction")) { // Test de permission
 				try {
-					// Si le chat faction est activé dans la configuration
-					if(Antykacraft.configHandler.isFactionChatEnabled()) {
-						if(args.length < 1) { // Toggle du chat faction
-							String status;
-							if(!MessageListener.factionChatLock.contains(player)) {
-								MessageListener.factionChatLock.add(player);
-								status = "activé";
-							} else {
-								MessageListener.factionChatLock.remove(player);
-								status = "désactivé";
-							}
-
-							player.sendMessage(Constants.PREFIX + "§aLe canal de faction automatique a été " + status);
-							Antykacraft.logHandler.getLogger().info(Constants.PREFIX_RAW + player + " a " + status + " le canal de faction automatique.");
-						} else { // Usage normal
+					if(args.length < 1) { // Toggle du chat faction
+						String status;
+						if(!MessageListener.factionChatLock.contains(player)) {
+							MessageListener.factionChatLock.add(player);
+							status = "activé";
+						} else {
+							MessageListener.factionChatLock.remove(player);
+							status = "désactivé";
+						}
+						player.sendMessage(Constants.PREFIX + "§aLe canal de faction automatique a été " + status);
+						Antykacraft.logHandler.getLogger().info(Constants.PREFIX_RAW + player + " a " + status + " le canal de faction automatique.");
+					} else { // Usage normal
+						// Si le chat faction est activé dans la configuration
+						if(Antykacraft.configHandler.isFactionChatEnabled()) {
 							String message = String.join(" ", args);
 							if(MessageListener.factionChatLock.contains(player)) {
 								player.sendMessage(Constants.PREFIX + "§eLe canal de faction automatique est activé, inutile de taper la commande.");
 							}
 							sendFactionMessage(player, message);
+						} else {
+							player.sendMessage(Constants.PREFIX + "§eLe canal de faction est temporairement désactivé.");
 						}
 					}
 				} catch(NullPointerException npe) {
@@ -66,7 +67,7 @@ public class FactionCommand implements CommandExecutor {
 				} catch(NullPointerException npe) {
 					dispName = dest.getName();
 				} finally {
-					dest.sendMessage("§6["+playerTeam.getDisplayName()+"] §r" + dispName + ": "+message);
+					dest.sendMessage("§6["+playerTeam.getDisplayName()+"] §r" + dispName + " > "+message);
 				}
 			}
 		}
