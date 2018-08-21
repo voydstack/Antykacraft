@@ -4,7 +4,7 @@ Custom plugin for "Antykacraft", a Minecraft server.
 
 # Commands
 
-###/faction
+### /faction
 - Description: Permet de communiquer avec sa faction
 - Utilisation: 
   * /faction: Active / Désactive le canal de faction automatique.
