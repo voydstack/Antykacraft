@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.voydstack.antykacraft.commands.FactionCommand;
+import fr.voydstack.antykacraft.commands.PingCommand;
 import fr.voydstack.antykacraft.config.ConfigHandler;
 import fr.voydstack.antykacraft.listeners.MessageListener;
 import fr.voydstack.antykacraft.scoreboard.ScoreboardHandler;
@@ -39,6 +40,7 @@ public class Antykacraft extends JavaPlugin {
 		/* Enregistrement des commandes */
 
 		this.getCommand("faction").setExecutor(new FactionCommand());
+		this.getCommand("ping").setExecutor(new PingCommand());
 
 		/* Enregistrement des listeners */
 

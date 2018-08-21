@@ -16,33 +16,36 @@ public class FactionCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
-			try {
-				// Si le chat faction est activé dans la configuration
-				if(Antykacraft.configHandler.isFactionChatEnabled()) {
-					if(args.length < 1) { // Toggle du chat faction
-						String status;
-						if(!MessageListener.factionChatLock.contains(player)) {
-							MessageListener.factionChatLock.add(player);
-							status = "activé";
-						} 
-						else {
-							MessageListener.factionChatLock.remove(player);
-							status = "désactivé";
-						}
+			if(player.hasPermission("antykacraft.faction")) { // Test de permission
+				try {
+					// Si le chat faction est activé dans la configuration
+					if(Antykacraft.configHandler.isFactionChatEnabled()) {
+						if(args.length < 1) { // Toggle du chat faction
+							String status;
+							if(!MessageListener.factionChatLock.contains(player)) {
+								MessageListener.factionChatLock.add(player);
+								status = "activé";
+							} else {
+								MessageListener.factionChatLock.remove(player);
+								status = "désactivé";
+							}
 
-						player.sendMessage(Constants.PREFIX + "§aLe canal de faction automatique a été " + status);
-						Antykacraft.logHandler.getLogger().info(Constants.PREFIX_RAW + player + " a " + status + " le canal de faction automatique.");
-					} else { // Usage normal
-						String message = String.join(" ", args);
-						if(MessageListener.factionChatLock.contains(player)) {
-							player.sendMessage(Constants.PREFIX + "§eLe canal de faction automatique est activé, inutile de taper la commande.");
+							player.sendMessage(Constants.PREFIX + "§aLe canal de faction automatique a été " + status);
+							Antykacraft.logHandler.getLogger().info(Constants.PREFIX_RAW + player + " a " + status + " le canal de faction automatique.");
+						} else { // Usage normal
+							String message = String.join(" ", args);
+							if(MessageListener.factionChatLock.contains(player)) {
+								player.sendMessage(Constants.PREFIX + "§eLe canal de faction automatique est activé, inutile de taper la commande.");
+							}
+							sendFactionMessage(player, message);
 						}
-						sendFactionMessage(player, message);
 					}
+				} catch(NullPointerException npe) {
+					player.sendMessage(Constants.PREFIX + "§cVous n'appartenez à aucune faction.");
+					npe.printStackTrace();
 				}
-			} catch(NullPointerException npe) {
-				player.sendMessage(Constants.PREFIX + "§cVous n'appartenez à aucune faction.");
-				npe.printStackTrace();
+			} else {
+				player.sendMessage(Constants.NO_PERMISSION);
 			}
 		}
 		return true;
