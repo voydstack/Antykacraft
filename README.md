@@ -106,9 +106,9 @@ Mini-jeu PvP avec des kits de combats.
     * /pvpbox multiplier: antykacraft.pvpbox.multiplier
     * /pvpbox multiplier [valeur]: antykacraft.pvpbox.multiplier.set
     
-#### /pvpbox killreward <valeur>
+#### /pvpbox killreward [valeur]
    - Description: Définit le nombre de points de victoire gagnés par kills.
-   - Utilisation: /pvpbox killreward <valeur>
+   - Utilisation: /pvpbox killreward [valeur]
    - Permission: antykacraft.pvpbox.killreward.set
  
 #### /pvpbox mostplayed
@@ -121,19 +121,19 @@ Mini-jeu PvP avec des kits de combats.
   - Utilisation: /pvpbox lessplayed
   - Permission: antykacraft.pvpbox.kit.lessplayed
 
-#### /pvpbox create <arène>
+#### /pvpbox create [arène]
   - Description: Crée une arène PvPBox (à la position de l'opérateur).
-  - Utilisation: /pvpbox create <nom de l'arène>
+  - Utilisation: /pvpbox create [arène]
   - Permission: antykacraft.pvpbox.create
   
-#### /pvpbox setdefault <arène>
+#### /pvpbox setdefault [arène]
   - Description: Définit l'arène PvPBox par défaut.
-  - Utilisation: /pvpbox setdefault <nom de l'arène>
+  - Utilisation: /pvpbox setdefault [arène]
   - Permission: antykacraft.pvpbox.setdefault
 
-#### /pvpbox remove <arène>
+#### /pvpbox remove [arène]
   - Description: Supprime une arène PvPBox.
-  - Utilisation: /pvpbox remove <nom de l'arène>
+  - Utilisation: /pvpbox remove [arène]
   - Permission: antykacraft.pvpbox.remove
   
 #### /pvpbox kits [args]
@@ -142,26 +142,26 @@ Mini-jeu PvP avec des kits de combats.
     * /pvpbox kits buyable: Rend gratuit tous les kits spéciaux.
     * /pvpbox kits buy: Ouvre le magasin de kits spéciaux.
     * /pvpbox kits list: Affiche la liste des kits PvPbox.
-    * /pvpbox kits enable <kit>: Active un kit PvPBox.
-    * /pvpbox kits disable <kit>: Désactive un kit PvPBox.
-    * /pvpbox kits price <kit> <prix>: Définit le prix d'un kit.
+    * /pvpbox kits enable [kit]: Active un kit PvPBox.
+    * /pvpbox kits disable [kit]: Désactive un kit PvPBox.
+    * /pvpbox kits price [kit] [prix]: Définit le prix d'un kit.
   - Permissions:
     * /pvpbox kits buyable: antykacraft.pvpbox.kit.buyable
     * /pvpbox kits buy: antykacraft.pvpbox.kit.buy
     * /pvpbox kits list: antykacraft.pvpbox.kit.list
-    * /pvpbox kits enable <kit>: antykacraft.pvpbox.kit.enable
-    * /pvpbox kits disable <kit>: antykacraft.pvpbox.kit.disable
-    * /pvpbox kits price <kit> <prix>: antykacraft.pvpbox.kit.price
+    * /pvpbox kits enable [kit]: antykacraft.pvpbox.kit.enable
+    * /pvpbox kits disable [kit]: antykacraft.pvpbox.kit.disable
+    * /pvpbox kits price [kit] [prix]: antykacraft.pvpbox.kit.price
  
 > ###### (!) Les commande suivantes ne sont pas executables par les joueurs
 
-###### /pvpbox <joueur>
+###### /pvpbox [joueur]
   - Description: Ouvre la liste des kits au joueur spécifié.
-  - Utilisation: /pvpbox <joueur> (@p pour les command blocks)
+  - Utilisation: /pvpbox [joueur] (@p pour les command blocks)
 
-###### /pvpbox lobby <joueur>
+###### /pvpbox lobby [joueur]
   - Description: Téléporte le joueur spécifié au lobby PvPBox.
-  - Utilisation: /pvpbox lobby <joueur>
+  - Utilisation: /pvpbox lobby [joueur]
  
 ## Kits
 
