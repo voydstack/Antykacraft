@@ -1,6 +1,6 @@
 # Antykacraft
 
-Custom plugin for "Antykacraft", a Minecraft server.
+Plugin sur mesure pour le serveur Minecraft "Antykacraft".
 
 # Commands
 
@@ -23,7 +23,7 @@ Custom plugin for "Antykacraft", a Minecraft server.
   * /ping [joueur]: antykacraft.ping.others
 # PvPBox
 
-Mini-jeu PvP avec des kits de combats
+Mini-jeu PvP avec des kits de combats.
 
 # Commands
 
