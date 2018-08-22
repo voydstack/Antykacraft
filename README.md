@@ -162,3 +162,103 @@ Mini-jeu PvP avec des kits de combats.
 ###### /pvpbox lobby <joueur>
   - Description: Téléporte le joueur spécifié au lobby PvPBox.
   - Utilisation: /pvpbox lobby <joueur>
+ 
+## Kits
+
+#### Guerrier
+  - Description: Incarnez l'âme d'un guerrier.
+  - Equipement:
+    * Epée en fer
+    * Plastron en fer
+    * Jambières en fer
+    * Bottes en  or
+
+### Archer
+  - Description: Mettez votre précision à l'épreuve.
+  - Equipement:
+    * Epée en bois
+    * Arc [Infinity]
+    * Salve
+    * Plastron en or
+    * Jambières en or
+    * Bottes en or
+  - Compétences:
+    * Salve: Lance une salve de flèches enflammées sur le champ de bataille.
+    
+### Reaper
+  - Description: Maudissez vos adversaires.
+  - Equipement:
+    * Faux [Sharpness IV]
+    * Potion de force II
+    * Potion splash de poison II
+    * Plastron en diamant
+    * Jambières en cuir
+    * Bottes en cuir
+
+### Wizard
+  - Description: Jouez avec la magie noire.
+  - Equipement:
+    * Pelle en fer [Sharpness IV]
+    * Potion de force I
+    * Potion de vitesse allongée
+    * Potion de soins II
+    * Potion de régéneration II
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+    
+### Trolleur
+  - Description: Faites ragequit vos adversaires.
+  - Equipement:
+    * Stick of truth [Knockback III, Sharpness II]
+    * 64x2 Boule de neiges
+    * 2x Potion splash de faiblesse
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+
+### Ninja
+  - Description: Combattez furtivement.
+  - Equipement:
+    * Katana (Epée en pierre) [Sharpness I, Knockback I]
+    * Shuriken
+    * Casque en cuir
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+  - Effets:
+    * Speed I (infini)
+  - Compétences:
+    * Shuriken: Lance un shuriken (3.5 dégats)
+
+### Tank
+  - Description: Encaissez tous les dégâts.
+  - Equipement:
+    * Hâche de bourrin
+    * Casque en cuir [Protection I]
+    * Plastron en diamant [Protection I]
+    * Jambières en diamant [Protection I]
+    * Bottes en diamant [Protection I]
+  - Effets:
+    * 16 coeurs
+    * Slow I
+    
+## Rabbit
+  - Description: Follow the white rabbit.
+  - Equipement:
+    * Fire Carrot [Sharpness 2, Fire Aspect II]
+    * Casque en cuir [Protection I]
+    * Plastron en cuir [Protection I]
+    * Jambières en cuir [Protection I]
+    * Bottes en cuir [Protection I]
+  - Effets:
+    * Jump II
+    * Speed II
+
+### Ghost
+  - Description: Faufilez vous dans les rangs ennemis.
+  - Equipement:
+    * Os du spectre [Sharpness III]
+    * 3x Potion splash Instants Damage
+  - Effets:
+    * Invibility
