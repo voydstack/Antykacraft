@@ -39,7 +39,9 @@ public class PvPBoxCommand implements CommandExecutor {
 							p.sendMessage(PvPBoxConfig.getPvPBoxRank(5));
 						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("trank")) { // Rang sur le serveur (par ratio kills/morts) (5 affichés)
-						p.sendMessage(PvPBoxConfig.getRatioPvPBoxRank(5));
+						if(p.hasPermission("antykacraft.pvpbox.trank")) {
+							p.sendMessage(PvPBoxConfig.getRatioPvPBoxRank(5));
+						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("debug")) { // Active / Désactive le mode debug
 						if(p.hasPermission("antykacraft.pvpbox.debug")) {
 							Kit.debug = Kit.debug == false ? true : false;
@@ -112,19 +114,23 @@ public class PvPBoxCommand implements CommandExecutor {
 								sender.sendMessage(PvPBoxConfig.getOfflinePlayerPvPBoxStats(args[1], false));
 						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("rank")) { // Rang sur le serveur (par nombre de kills) (nombre spécifié >= 5)
-						int i = 0;
-						try {i = Integer.valueOf(args[1]);}
-						catch(Exception e) {sender.sendMessage(Constants.PVPBOX_PREFIX + "§cVous devez indiquer un nombre en 2è argument !");}
-						if(i >= 5) {
-							sender.sendMessage(PvPBoxConfig.getPvPBoxRank(i));
-						} else sender.sendMessage(Constants.PVPBOX_PREFIX + "§cLa limite du classement doit être supérieure ou égale à  5.");
+						if(p.hasPermission("antykacraft.pvpbox.rank.limit")) {
+							int i = 0;
+							try {i = Integer.valueOf(args[1]);}
+							catch(Exception e) {sender.sendMessage(Constants.PVPBOX_PREFIX + "§cVous devez indiquer un nombre en 2è argument !");}
+							if(i >= 5) {
+								sender.sendMessage(PvPBoxConfig.getPvPBoxRank(i));
+							} else sender.sendMessage(Constants.PVPBOX_PREFIX + "§cLa limite du classement doit être supérieure ou égale à  5.");
+						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("trank")) { // Rang sur le serveur (par ration kills / morts) (nombre spécifié >= 5)
-						int i = 0;
-						try {i = Integer.valueOf(args[1]);}
-						catch(Exception e) {sender.sendMessage(Constants.PVPBOX_PREFIX + "§cVous devez indiquer un nombre en 2è argument !");}
-						if(i >= 5) {
-							sender.sendMessage(PvPBoxConfig.getRatioPvPBoxRank(i));
-						} else sender.sendMessage(Constants.PVPBOX_PREFIX + "§cLa limite du classement doit être supérieure ou égale à  5.");
+						if(p.hasPermission("antykacraft.pvpbox.trank.limit")) {
+							int i = 0;
+							try {i = Integer.valueOf(args[1]);}
+							catch(Exception e) {sender.sendMessage(Constants.PVPBOX_PREFIX + "§cVous devez indiquer un nombre en 2è argument !");}
+							if(i >= 5) {
+								sender.sendMessage(PvPBoxConfig.getRatioPvPBoxRank(i));
+							} else sender.sendMessage(Constants.PVPBOX_PREFIX + "§cLa limite du classement doit être supérieure ou égale à  5.");
+						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("lobby")) { // Configuration du lobby PvPBox
 						if(args[1].equalsIgnoreCase("set")) { // Permet de définir le lobby PvPBox (à la position de l'opérateur)
 							if(p.hasPermission("antykacraft.pvpbox.lobby.set")) {
@@ -143,7 +149,7 @@ public class PvPBoxCommand implements CommandExecutor {
 							}
 						} else p.sendMessage(Constants.NO_PERMISSION);
 					} else if(args[0].equalsIgnoreCase("killreward")) { // Permet de définir le nombres de points gagnés par kill
-						if(p.hasPermission("antykacraft.pvpbox.points.amount")) {
+						if(p.hasPermission("antykacraft.pvpbox.killreward.set")) {
 							try {
 								int amount = Integer.parseInt(args[1]);
 								PvPBoxConfig.setPointsPerKill(amount);

@@ -20,7 +20,6 @@ import fr.voydstack.antykacraft.pvpbox.PvPBoxCore;
 import fr.voydstack.antykacraft.pvpbox.kit.Kit;
 import fr.voydstack.antykacraft.utils.Constants;
 import fr.voydstack.antykacraft.utils.MiscellaneousUtils;
-import net.md_5.bungee.api.ChatColor;
 
 public class PvPBoxConfig {
 	private static FileConfiguration config;
@@ -52,12 +51,13 @@ public class PvPBoxConfig {
 		Set<String> configSecList = config.getConfigurationSection("antykacraft.pvpbox.arenas").getKeys(false);
 		String message = "";
 		if(configSecList.size() != 0) {
-			message = ChatColor.GOLD + "Liste des arènes PvPBox (" + ChatColor.AQUA + configSecList.size() + ChatColor.GOLD + ") : \n";
+			message = "§6Liste des arènes PvPBox (§b" + configSecList.size() + "§6) : \n";
 			for(String sec : configSecList) {
-				message += ChatColor.GOLD + "- " + ChatColor.AQUA + MiscellaneousUtils.wordMaj(sec) + "\n";
+				String current = sec.equalsIgnoreCase(getDefaultPvPBoxArena()) ? "§6<=" : "";
+				message += "§6- §b" + MiscellaneousUtils.wordMaj(sec) + " " + current + "\n";
 			}
 		} else {
-			message = ChatColor.RED + "Il n'y a aucune arène PvPBox pour le moment ...";
+			message = "§cIl n'y a aucune arène PvPBox pour le moment ...";
 		}
 		return message;
 	}
@@ -92,7 +92,7 @@ public class PvPBoxConfig {
 
 	public static String getRatioPvPBoxRank(int limit) {
 		if(limit != 0) {
-			String message = ChatColor.GOLD + "[PvPBox] " + ChatColor.GREEN + "Voici le classement PvPBox (ratio) : \n" + ChatColor.GOLD + "--------------------------------\n";
+			String message = "§6[PvPBox] §a" + "Voici le classement PvPBox (ratio) : \n" + "§6--------------------------------\n";
 			ConfigurationSection configsec = config.getConfigurationSection("antykacraft.pvpbox.players");
 			Set<String> uuids = configsec.getKeys(false);
 			List<Double> pvpboxPlayerRatio = new ArrayList<Double>();
@@ -112,7 +112,7 @@ public class PvPBoxConfig {
 			for(int i = 0; i < limit; i++) {
 				Object[] f = (Object[]) pK.get(pvpboxPlayerRatio.get(i)).toArray();
 				if(((String) f[pseudo]).contains("_")) MiscellaneousUtils.replaceLast(((String) f[pseudo]), "_", "");
-				message += ChatColor.GOLD + "" + (i + 1) + ". " + f[pseudo] + " : " + ChatColor.AQUA + pvpboxPlayerRatio.get(i) + " (" + getOfflinePlayerPvPBoxKills((String) f[pseudo]) + " Kills & " + getOfflinePlayerPvPBoxDeaths((String) f[pseudo]) + " Morts).\n";
+				message += "§6" + (i + 1) + ". " + f[pseudo] + " : §b" + pvpboxPlayerRatio.get(i) + " (" + getOfflinePlayerPvPBoxKills((String) f[pseudo]) + " Kills & " + getOfflinePlayerPvPBoxDeaths((String) f[pseudo]) + " Morts).\n";
 				if(pK.get(pvpboxPlayerRatio.get(i)).size() > 1) {
 					if(pseudo == pK.get(pvpboxPlayerRatio.get(i)).size() - 1) pseudo = 0;
 					else pseudo ++;
@@ -124,7 +124,7 @@ public class PvPBoxConfig {
 
 	public static String getPvPBoxRank(int limit) {
 		if(limit != 0) {
-			String message = ChatColor.GOLD + "[PvPBox] " + ChatColor.GREEN + "Voici le classement PvPBox (kills) : \n" + ChatColor.GOLD + "--------------------------------\n";
+			String message = "§6[PvPBox] §a" + "Voici le classement PvPBox (kills) : \n" + "§6--------------------------------\n";
 			ConfigurationSection configsec = config.getConfigurationSection("antykacraft.pvpbox.players");
 			Set<String> uuids = configsec.getKeys(false);
 			List<Integer> pvpboxPlayerKills = new ArrayList<Integer>();
@@ -142,7 +142,7 @@ public class PvPBoxConfig {
 			for(int i = 0; i < limit; i++) {
 				Object[] f = (Object[]) pK.get(pvpboxPlayerKills.get(i)).toArray();
 				if(((String) f[pseudo]).contains("_")) MiscellaneousUtils.replaceLast(((String) f[pseudo]), "_", "");
-				message += ChatColor.GOLD + "" + (i + 1) + ". " + f[pseudo] + " : " + ChatColor.AQUA + pvpboxPlayerKills.get(i) + " Kills\n";
+				message += "§6" + (i + 1) + ". " + f[pseudo] + " : §b" + pvpboxPlayerKills.get(i) + " Kills\n";
 				if(pK.get(pvpboxPlayerKills.get(i)).size() > 1) {
 					if(pseudo == pK.get(pvpboxPlayerKills.get(i)).size() - 1) pseudo = 0;
 					else pseudo ++;

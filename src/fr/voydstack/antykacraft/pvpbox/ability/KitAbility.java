@@ -38,7 +38,7 @@ public class KitAbility {
 						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
 							if (!p.equals(pl)) {
 								if (!i.isDead()) {
-									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.5D) {
+									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.ENTITY_SILVERFISH_HURT, 1.0F, 1.2F);
 										pl.damage(7D);
 										i.remove();
@@ -187,7 +187,7 @@ public class KitAbility {
 						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
 							if (!p.equals(pl)) {
 								if (!i.isDead()) {
-									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.5D) {
+									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.ENTITY_SLIME_SQUISH, 1.0F, 1.2F);
 										pl.damage(4D);
 										i.remove();
@@ -311,7 +311,7 @@ public class KitAbility {
 						for (Player pl : PvPBoxCore.players.keySet()) {
 							if (!p.equals(pl)) {
 								if(!i.isDead()) {
-									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.5D && i.getLocation().distanceSquared(pl.getEyeLocation()) > 1.5D) {
+									if (MiscellaneousUtils.isOnSameBlock(i, pl)) {
 										pl.getWorld().playSound(i.getLocation(), Sound.BLOCK_WOODEN_TRAPDOOR_CLOSE, 1.0F, 1.2F);
 										pl.damage(4D);
 										new Effect(EffectType.STUN).active(pl, 1);
@@ -337,7 +337,7 @@ public class KitAbility {
 				p.removePotionEffect(PotionEffectType.INVISIBILITY);
 				Bukkit.getScheduler().runTaskTimer(Antykacraft.instance, new BukkitRunnable() {
 					int i = 0;
-					float angle = 60F;
+					float angle = 30F;
 					public void run() {
 						i++;
 						if(i <= 3) {

@@ -9,11 +9,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -107,7 +109,7 @@ public class PvPBoxInteractListener implements Listener {
 
 	@EventHandler
 	public void fallingblock(EntityChangeBlockEvent e) {
-		if(e.getEntity().getWorld().getName().equals("event")) {
+		if(e.getEntity().getWorld().getName().equals(PvPBoxCore.eventWorld)) {
 			if(e.getEntity() instanceof FallingBlock) {
 				FallingBlock b = (FallingBlock) e.getEntity();
 				if(b.getMaterial().equals(Material.COBBLESTONE)) {
@@ -123,7 +125,7 @@ public class PvPBoxInteractListener implements Listener {
 	public void playerDamage(EntityDamageEvent e) {
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
-			if(p.getWorld().getName().equals("event")) {
+			if(p.getWorld().getName().equals(PvPBoxCore.eventWorld)) {
 				if(PvPBoxCore.players.containsKey(p)) {
 					if(e.getCause() == DamageCause.BLOCK_EXPLOSION) {
 						if(explosionImmunity.contains(p)) {
@@ -135,6 +137,19 @@ public class PvPBoxInteractListener implements Listener {
 						e.setCancelled(true);
 						e.setDamage(0D);
 					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void snowballHitPlayer(EntityDamageByEntityEvent e) {
+		if(e.getEntity() instanceof Player && e.getDamager() instanceof Snowball) {
+			Player p = (Player) e.getEntity();
+			if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+				if(PvPBoxCore.players.containsKey(p)) {
+					e.setDamage(1D);
+					e.setCancelled(false);
 				}
 			}
 		}
