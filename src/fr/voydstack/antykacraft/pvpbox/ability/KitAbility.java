@@ -309,7 +309,7 @@ public class KitAbility {
 				new BukkitRunnable() {
 					public void run() {
 						for (Player pl : PvPBoxCore.players.keySet()) {
-							if (!p.equals(pl)) {
+							if (p.equals(pl)) {
 								if(!i.isDead()) {
 									if (MiscellaneousUtils.isOnSameBlock(i, pl)) {
 										pl.getWorld().playSound(i.getLocation(), Sound.BLOCK_WOODEN_TRAPDOOR_CLOSE, 1.0F, 1.2F);
@@ -324,6 +324,11 @@ public class KitAbility {
 						}
 					}
 				}.runTaskTimer(Antykacraft.instance, 0L, 1L);
+				Bukkit.getScheduler().runTaskLater(Antykacraft.instance, new Runnable() {
+					public void run() {
+						i.remove();
+					}
+				}, 100L);
 			}
 		};
 	}
@@ -337,10 +342,10 @@ public class KitAbility {
 				p.removePotionEffect(PotionEffectType.INVISIBILITY);
 				Bukkit.getScheduler().runTaskTimer(Antykacraft.instance, new BukkitRunnable() {
 					int i = 0;
-					float angle = 30F;
+					float angle = 60F;
 					public void run() {
 						i++;
-						if(i <= 3) {
+						if(i <= 6) {
 							final Item it = p.getWorld().dropItem(p.getEyeLocation(), new ItemStack(Material.FEATHER));
 							it.setPickupDelay(9999);
 							it.setVelocity(MiscellaneousUtils.setAngle(p, angle, 2.5D));
@@ -349,23 +354,18 @@ public class KitAbility {
 									for (Player pl : PvPBoxCore.players.keySet()) {
 										if (!p.equals(pl)) {
 											if(!it.isDead()) {
-												if(!it.isOnGround()) {
-													if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
-														pl.getWorld().playSound(it.getLocation(), Sound.ENTITY_ARROW_HIT, 1.0F, 1.2F);
-														pl.damage(3D);
-														it.remove();
-														cancel();
-													}
-												} else {
+												if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
+													pl.getWorld().playSound(it.getLocation(), Sound.ENTITY_ARROW_HIT, 1.0F, 1.2F);
+													pl.damage(2D);
 													it.remove();
 													cancel();
 												}
-											}
-										} else cancel();
+											} else cancel();
+										}
 									}
 								}
 							}.runTaskTimer(Antykacraft.instance, 0L, 1L);
-							angle += 30F;
+							angle += 10F;
 							Bukkit.getScheduler().runTaskLater(Antykacraft.instance, new Runnable() {
 								public void run() {
 									it.remove();
@@ -373,7 +373,7 @@ public class KitAbility {
 							}, 100L);
 						}
 					}
-				}, 0L, 2L);
+				}, 0L, 1L);
 			}
 		};
 	}
