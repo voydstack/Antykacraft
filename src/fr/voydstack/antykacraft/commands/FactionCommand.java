@@ -42,7 +42,7 @@ public class FactionCommand implements CommandExecutor {
 						}
 					}
 				} catch(NullPointerException npe) {
-					player.sendMessage(Constants.PREFIX + "§cVous n'appartenez à aucune faction.");
+					/*player.sendMessage(Constants.PREFIX + "§cVous n'appartenez à aucune faction.");*/
 					npe.printStackTrace();
 				}
 			} else {
@@ -61,11 +61,11 @@ public class FactionCommand implements CommandExecutor {
 		for(String name : playerTeam.getEntries()) {
 			Player dest = Bukkit.getPlayer(name);
 			if(dest.isOnline()) {
-				String dispName = dest.getName();
+				String dispName = player.getName();
 				try {
-					dispName = dest.getDisplayName();
+					dispName = player.getDisplayName();
 				} catch(NullPointerException npe) {
-					dispName = dest.getName();
+					dispName = player.getName();
 				} finally {
 					dest.sendMessage("§6["+playerTeam.getDisplayName()+"] §r" + dispName + " > "+message);
 				}
