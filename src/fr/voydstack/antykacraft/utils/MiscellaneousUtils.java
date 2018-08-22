@@ -67,12 +67,10 @@ public class MiscellaneousUtils {
 		Location aloc = a.getLocation();
 		Location bloc = b.getLocation();
 		int alocx = aloc.getBlockX(),
-			alocy = aloc.getBlockY(),
 			alocz = aloc.getBlockZ();
 		int blocx = bloc.getBlockX(),
-			blocy = bloc.getBlockY(),
 			blocz = bloc.getBlockZ();
-		if(alocx == blocx && alocy == blocy && alocz == blocz) return true;
+		if(alocx == blocx && alocz == blocz) return true;
 		else return false;
 	}
 }

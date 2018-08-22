@@ -150,7 +150,7 @@ public class Kit {
 
 		/* Guerrier */
 
-		items = new ItemStack[] {ItemLib.setUnbreakable(new ItemStack(Material.IRON_SWORD))};
+		items = new ItemStack[] {new ItemStack(Material.IRON_SWORD)};
 		head = ItemLib.addEnchantments(ItemLib.createItem(Material.SKULL_ITEM, 1, (byte) 2, "Warrior Head", null), 
 				new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1});
 		armor = new ItemStack[] {new ItemStack(Material.GOLD_BOOTS), new ItemStack(Material.IRON_LEGGINGS),
@@ -160,7 +160,7 @@ public class Kit {
 
 		/* Archer */
 
-		items = new ItemStack[] {ItemLib.setUnbreakable(new ItemStack(Material.WOOD_SWORD)), 
+		items = new ItemStack[] {new ItemStack(Material.WOOD_SWORD), 
 				ItemLib.addEnchantments(new ItemStack(Material.BOW), new Enchantment[] {Enchantment.ARROW_INFINITE, Enchantment.DURABILITY}, new int[] {1, 127}),
 				ItemLib.addDisplayName(new ItemStack(Material.ARROW), "§aSalve")};
 		head = ItemLib.addEnchantments(ItemLib.createItem(Material.SKULL_ITEM, 1, (byte) 0, "Archer Head", null),
@@ -224,11 +224,11 @@ public class Kit {
 
 		/* Tank */
 
-		items = new ItemStack[] {ItemLib.setUnbreakable(ItemLib.createItem(Material.GOLD_AXE, 1, (short) 0, ChatColor.GOLD + "Hache de bourrin", null))};
-		armor = new ItemStack[] {ItemLib.setUnbreakable(new ItemStack(Material.DIAMOND_BOOTS)), 
-				ItemLib.setUnbreakable(new ItemStack(Material.DIAMOND_LEGGINGS)), 
-				ItemLib.setUnbreakable(new ItemStack(Material.DIAMOND_CHESTPLATE)), 
-				ItemLib.setUnbreakable(ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLUE))};
+		items = new ItemStack[] {ItemLib.createItem(Material.GOLD_AXE, 1, (short) 0, ChatColor.GOLD + "Hache de bourrin", null)};
+		armor = new ItemStack[] {new ItemStack(Material.DIAMOND_BOOTS), 
+				new ItemStack(Material.DIAMOND_LEGGINGS), 
+				new ItemStack(Material.DIAMOND_CHESTPLATE), 
+				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLUE)};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.SLOW, (int) MiscellaneousUtils.calculateTicks(3600), 1),
 				new PotionEffect(PotionEffectType.WEAKNESS, (int) MiscellaneousUtils.calculateTicks(3600), 0)};
 		Kit tank = new Kit("Tank", items, armor, effects, 32D, PvPBoxKitIcon.tankKit, (byte)2, (byte)8, (byte)1, (byte)2);
@@ -285,7 +285,7 @@ public class Kit {
 		/* Pirate */
 
 		items = new ItemStack[] {ItemLib.addDisplayName(new ItemStack(Material.STONE_SWORD), "Sabre"), 
-				ItemLib.setUnbreakable(ItemLib.addDisplayName(new ItemStack(Material.GOLD_HOE), "Vieux Révolver")), 
+				ItemLib.addDisplayName(new ItemStack(Material.GOLD_HOE), "Vieux Révolver"), 
 				ItemLib.addDisplayName(ItemLib.createPotion(PotionType.INSTANT_HEAL, false, false, 2), "§aAntidote du scorbut")};
 		armor = new ItemStack[] {new ItemStack(Material.AIR), ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.BLACK),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_CHESTPLATE), Color.RED),
@@ -298,7 +298,7 @@ public class Kit {
 
 		/* Marin */
 
-		items = new ItemStack[] {ItemLib.addDisplayName(ItemLib.setUnbreakable(new ItemStack(Material.FISHING_ROD)), "§eGrappin"), 
+		items = new ItemStack[] {ItemLib.addDisplayName(new ItemStack(Material.FISHING_ROD), "§eGrappin"), 
 				ItemLib.addDisplayName(ItemLib.addEnchantments(new ItemStack(Material.RAW_FISH), new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {2}), "§rPoisson saillant")};
 		armor = new ItemStack[] {ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_BOOTS), Color.YELLOW), ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.YELLOW),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_CHESTPLATE), Color.YELLOW),
@@ -323,7 +323,7 @@ public class Kit {
 		
 		/* Chasseur */
 		
-		items = new ItemStack[] {ItemLib.setUnbreakable(ItemLib.addEnchantments(ItemLib.addDisplayName(new ItemStack(Material.IRON_HOE), "Couteau de chasse"), new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {2})),
+		items = new ItemStack[] {ItemLib.addEnchantments(ItemLib.addDisplayName(new ItemStack(Material.IRON_HOE), "Couteau de chasse"), new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {2}),
 				ItemLib.addDisplayName(new ItemStack(Material.TRAP_DOOR), "Piège à ours")};
 		armor = new ItemStack[] {new ItemStack(Material.LEATHER_BOOTS), null, new ItemStack(Material.LEATHER_CHESTPLATE), null};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.NIGHT_VISION, (int) MiscellaneousUtils.calculateTicks(3600), 2)};

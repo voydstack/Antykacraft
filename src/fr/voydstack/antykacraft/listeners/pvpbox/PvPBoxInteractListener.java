@@ -22,6 +22,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
 
@@ -204,6 +205,17 @@ public class PvPBoxInteractListener implements Listener {
 				if(effect.getEffectType() == EffectType.STUN) {
 					e.setCancelled(true);
 				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void itemDurability(PlayerItemDamageEvent e) {
+		Player p = e.getPlayer();
+		if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+			if(PvPBoxCore.players.containsKey(p)) {
+				e.setDamage(0);
+				e.setCancelled(true);
 			}
 		}
 	}

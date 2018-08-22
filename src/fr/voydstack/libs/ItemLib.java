@@ -67,7 +67,7 @@ public class ItemLib extends JavaPlugin {
 		armor.setItemMeta(metaArmor);
 		return armor;
 	}
-	
+
 	public static ItemStack createPotion(PotionType type, boolean extend, boolean upgraded, int amount) {
 		ItemStack potion = new ItemStack(Material.POTION, amount);
 		PotionMeta meta = (PotionMeta) potion.getItemMeta();
@@ -75,7 +75,7 @@ public class ItemLib extends JavaPlugin {
 		potion.setItemMeta(meta);
 		return potion;
 	}
-	
+
 	public static ItemStack createSplashPotion(PotionType type, boolean extend, boolean upgraded, int amount) {
 		ItemStack potion = new ItemStack(Material.SPLASH_POTION, amount);
 		PotionMeta meta = (PotionMeta) potion.getItemMeta();
@@ -83,7 +83,7 @@ public class ItemLib extends JavaPlugin {
 		potion.setItemMeta(meta);
 		return potion;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public static ItemStack createPlayerHead(String playerName, String display) {
 		ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
@@ -102,7 +102,7 @@ public class ItemLib extends JavaPlugin {
 		i.setItemMeta(pM);
 		return i;
 	}
-	
+
 	public static ItemStack setCustomPotionEffect(PotionEffectType p, int d, int a, PotionType pT, boolean s) {
 		Material son = s ? Material.SPLASH_POTION : Material.POTION;
 		ItemStack i = new ItemStack(son);
@@ -112,7 +112,7 @@ public class ItemLib extends JavaPlugin {
 		i.setItemMeta(pM);	
 		return i;
 	}
-	
+
 	public static ItemStack[] getFullColoredArmor(Color c) {
 		String[] s = new String[] {"BOOTS", "LEATHER", "CHESTPLATE", "HELMET"};
 		ItemStack[] it = new ItemStack[4];
@@ -120,7 +120,7 @@ public class ItemLib extends JavaPlugin {
 			it[i] = colorLeatherArmor(new ItemStack(Material.getMaterial("LEATHER_" + s[i])), c);
 		return it;
 	}
-	
+
 	public static ItemStack[] getFullColoredArmor(Color c, Enchantment[] e, int[] l) {
 		String[] s = new String[] {"BOOTS", "LEATHER", "CHESTPLATE", "HELMET"};
 		ItemStack[] it = new ItemStack[4];
@@ -128,7 +128,7 @@ public class ItemLib extends JavaPlugin {
 			it[i] = addEnchantments(colorLeatherArmor(new ItemStack(Material.getMaterial("LEATHER_" + s[i])), c), e, l);
 		return it;
 	}
-	
+
 	public static ItemStack setUnbreakable(ItemStack item) {
 		ItemMeta iM = item.getItemMeta();
 		iM.setUnbreakable(true);
@@ -136,9 +136,9 @@ public class ItemLib extends JavaPlugin {
 		item.setItemMeta(iM);
 		return item;
 	}
-	
+
 	/* Formatting Utils */
-	
+
 	public static List<String> createLore(String[] lore) {
 		List<String> itemLore = new ArrayList<String>();
 		for(String lorePart : lore) itemLore.add(lorePart);

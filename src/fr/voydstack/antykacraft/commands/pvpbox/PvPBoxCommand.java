@@ -174,7 +174,7 @@ public class PvPBoxCommand implements CommandExecutor {
 								p.openInventory(PvPBoxGui.kitShopGUI(p));
 							} else p.sendMessage(Constants.NO_PERMISSION);
 						} else if(args[1].equalsIgnoreCase("list")) {
-							if(p.hasPermission("antykacraft.pvpbox.kits.list")) {
+							if(p.hasPermission("antykacraft.pvpbox.kit.list")) {
 								p.sendMessage(Constants.PVPBOX_PREFIX + "§aListe des kits PvPBox: ");
 								for(Kit kit : Kit.kits) {
 									String color = Kit.specialKits.contains(kit) ? "§6§l" : "§6";
