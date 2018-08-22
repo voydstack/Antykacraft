@@ -32,17 +32,17 @@ Mini-jeu PvP avec des kits de combats
   - Utilisation:
     * /pvpbox [args]
     
-###### /pvpbox list
+#### /pvpbox list
   - Description: Affiche la liste des arènes PvPBox.
   - Utilisation: /pvpbox list
   - Permission: antykacraft.pvpbox.list
   
-###### /pvpbox reload
+#### /pvpbox reload
   - Description: Rafraichit dynamiquement la configuration du plugin.
   - Utilisation: /pvpbox reload
   - Pemission: antykacraft.pvpbox.reload
 
-###### /pvpbox stats [joueur]
+#### /pvpbox stats [joueur]
   - Description: Affiche les stats PvPBox de joueurs.
   - Utilisation:
     * /pvpbox stats: Affiche ses stats personnelles.
@@ -51,7 +51,7 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox stats: antykacraft.pvpbox.stats
     * /pvpbox stats [joueur]: antykacraft.pvpbox.stats.others
    
-###### /pvpbox rank [limit]
+#### /pvpbox rank [limit]
   - Description: Affiche un classement des joueurs PvPBox (par nombre de kills).
   - Utilisation:
     * /pvpbox rank: Affiche le classement avec une limite de 5 joueurs.
@@ -60,7 +60,7 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox rank: antykacraft.pvpbox.rank
     * /pvpbox rank [limite]: antykacraft.pvpbox.rank.limit
 
-###### /pvpbox trank [limit]
+#### /pvpbox trank [limit]
   - Description: Affiche un classement des joueurs PvPBox (par ratio kills / morts).
   - Utilisation
     * /pvpbox trank: Affiche le classement avec une limite de 5 joueurs.
@@ -69,17 +69,17 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox trank: antykacraft.pvpbox.trank
     * /pvpbox trank [limite]: antykacraft.pvpbox.trank.limit
     
-###### /pvpbox debug
+#### /pvpbox debug
   - Description: Active / Désactive le mode debug.
   - Utilisation: /pvpbox debug
   - Permission: antykacraft.pvpbox.debug
 
-###### /pvpbox leave
+#### /pvpbox leave
   - Description: Quitte une partie de PvPBox en cours.
   - Utilisation: /pvpbox leave
   - Permission: antykacraft.pvpbox.leave
   
-###### /pvpbox lobby [args]
+#### /pvpbox lobby [args]
   - Description: Permet de gérer le lobby PvPBox.
   - Utilisation:
     * /pvpbox lobby: Téléporte l'opérateur au lobby PvPBox (si défini).
@@ -88,7 +88,7 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox lobby: antykacraft.pvpbox.lobby
     * /pvpbox lobby set: antykacraft.pvpbox.lobby.set
     
-###### /pvpbox points [args]
+#### /pvpbox points [args]
   - Description: Permet de gérer les points de victoire.
   - Utilisation:
     * /pvpbox points: Affiche les points de victoire de l'opérateur.
@@ -97,7 +97,7 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox: antykacraft.pvpbox.points
     * /pvpbox points give [joueur] [somme]: antykacraft.pvpbox.points.give
 
-###### /pvpbox multiplier [valeur]
+#### /pvpbox multiplier [valeur]
   - Description: Permet de gérer le multiplicateur de points de victoire.
   - Utilisation:
     * /pvpbox multiplier: Affiche la valeur du multiplicateur de points de victoire.
@@ -106,37 +106,37 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox multiplier: antykacraft.pvpbox.multiplier
     * /pvpbox multiplier [valeur]: antykacraft.pvpbox.multiplier.set
     
-###### /pvpbox killreward <valeur>
+#### /pvpbox killreward <valeur>
    - Description: Définit le nombre de points de victoire gagnés par kills.
    - Utilisation: /pvpbox killreward <valeur>
    - Permission: antykacraft.pvpbox.killreward.set
  
-###### /pvpbox mostplayed
+#### /pvpbox mostplayed
   - Description: Affiche le kit le plus joué.
   - Utilisation: /pvpbox mostplayed
   - Permission: antykacraft.pvpbox.kit.mostplayed
 
-###### /pvpbox lessplayed
+#### /pvpbox lessplayed
   - Description: Affiche le kit le moins joué.
   - Utilisation: /pvpbox lessplayed
   - Permission: antykacraft.pvpbox.kit.lessplayed
 
-###### /pvpbox create <arène>
+#### /pvpbox create <arène>
   - Description: Crée une arène PvPBox (à la position de l'opérateur).
   - Utilisation: /pvpbox create <nom de l'arène>
   - Permission: antykacraft.pvpbox.create
   
-###### /pvpbox setdefault <arène>
+#### /pvpbox setdefault <arène>
   - Description: Définit l'arène PvPBox par défaut.
   - Utilisation: /pvpbox setdefault <nom de l'arène>
   - Permission: antykacraft.pvpbox.setdefault
 
-###### /pvpbox remove <arène>
+#### /pvpbox remove <arène>
   - Description: Supprime une arène PvPBox.
   - Utilisation: /pvpbox remove <nom de l'arène>
   - Permission: antykacraft.pvpbox.remove
   
-###### /pvpbox kits [args]
+#### /pvpbox kits [args]
   - Description: Permet de gérer les kits PvPBox.
   - Utilisation:
     * /pvpbox kits buyable: Rend gratuit tous les kits spéciaux.
@@ -153,7 +153,7 @@ Mini-jeu PvP avec des kits de combats
     * /pvpbox kits disable <kit>: antykacraft.pvpbox.kit.disable
     * /pvpbox kits price <kit> <prix>: antykacraft.pvpbox.kit.price
  
-(!) Les commande suivantes ne sont pas executables par les joueurs
+> ###### (!) Les commande suivantes ne sont pas executables par les joueurs
 
 ###### /pvpbox <joueur>
   - Description: Ouvre la liste des kits au joueur spécifié.
