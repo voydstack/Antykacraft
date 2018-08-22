@@ -49,7 +49,6 @@ public class PvPBoxCommand implements CommandExecutor {
 						if(p.hasPermission("antykacraft.pvpbox.leave")) {
 							if(PvPBoxCore.players.containsKey(p)) {
 								Kit.resetPvPBoxPlayer(p);
-								p.teleport(PvPBoxConfig.getLobbyLocation());
 							} else p.sendMessage(Constants.PVPBOX_PREFIX + "§cNope.");
 						}
 					} else if(args[0].equalsIgnoreCase("lobby")) { // Permet de se téléporter au lobby PvPBox
@@ -167,6 +166,14 @@ public class PvPBoxCommand implements CommandExecutor {
 						} else if(args[1].equalsIgnoreCase("buy")) { // Ouvre le panneau d'achat de kits
 							if(p.hasPermission("antykacraft.pvpbox.kit.buy")) {
 								p.openInventory(PvPBoxGui.kitShopGUI(p));
+							} else p.sendMessage(Constants.NO_PERMISSION);
+						} else if(args[1].equalsIgnoreCase("list")) {
+							if(p.hasPermission("antykacraft.pvpbox.kits.list")) {
+								p.sendMessage(Constants.PVPBOX_PREFIX + "§aListe des kits PvPBox: ");
+								for(Kit kit : Kit.kits) {
+									String color = Kit.specialKits.contains(kit) ? "§6§l" : "§6";
+									p.sendMessage("§a> " + color + kit.getName());
+								}
 							} else p.sendMessage(Constants.NO_PERMISSION);
 						} else p.sendMessage(Constants.PVPBOX_PREFIX+"§cArgument inconnu.");
 					} else p.sendMessage(Constants.PVPBOX_PREFIX+"§cArgument inconnu.");

@@ -13,7 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
+import fr.voydstack.antykacraft.config.pvpbox.PvPBoxConfig;
 import fr.voydstack.antykacraft.pvpbox.PvPBoxCore;
 import fr.voydstack.antykacraft.pvpbox.ability.KitAbility;
 import fr.voydstack.antykacraft.pvpbox.ability.MainAbility;
@@ -174,7 +176,7 @@ public class Kit {
 		/* Reaper */
 
 		items = new ItemStack[] {ItemLib.addEnchantments(ItemLib.createItem(Material.IRON_HOE, 1, (short) 0, "§8Faux", null), new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {4}),
-				ItemLib.createPotion(1, 8233), ItemLib.createPotion(1, 16420)};
+				ItemLib.createPotion(PotionType.STRENGTH, false, true, 1), ItemLib.createSplashPotion(PotionType.POISON, false, true, 1)};
 		head = ItemLib.createItem(Material.SKULL_ITEM, 1, (byte) 1, "Reaper Head", null);
 		armor = new ItemStack[] {ItemLib.addEnchantments(ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_BOOTS), Color.BLACK), new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1}),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.BLACK), new ItemStack(Material.DIAMOND_CHESTPLATE), head};
@@ -183,8 +185,8 @@ public class Kit {
 
 		/* Wizard */
 
-		items = new ItemStack[] {new ItemStack(Material.IRON_SPADE), ItemLib.createPotion(1, 8201), ItemLib.createPotion(1, 8258),
-				ItemLib.createPotion(1, 8229), ItemLib.createPotion(1, 8225)};
+		items = new ItemStack[] {new ItemStack(Material.IRON_SPADE), ItemLib.createPotion(PotionType.STRENGTH, false, false, 1), ItemLib.createPotion(PotionType.SPEED, true, false, 1),
+				ItemLib.createPotion(PotionType.INSTANT_HEAL, false, true, 1), ItemLib.createPotion(PotionType.REGEN, false, true, 1)};
 		head = ItemLib.addEnchantments(ItemLib.createPlayerHead("MHF_Villager", "Wizard Head"), new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1});
 		armor = new ItemStack[] {ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_BOOTS), Color.YELLOW),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.YELLOW), 
@@ -197,7 +199,7 @@ public class Kit {
 		ItemStack trollerStick = ItemLib.addEnchantments(ItemLib.createItem(Material.STICK, 1, (short) 0, "§dTroller Stick", null), 
 				new Enchantment[] {Enchantment.KNOCKBACK, Enchantment.DAMAGE_ALL}, new int[] {3, 2});
 		items = new ItemStack[] {new ItemStack(Material.SNOW_BALL, 64), new ItemStack(Material.SNOW_BALL, 64), trollerStick, 
-				ItemLib.createPotion(1, 16456), ItemLib.createPotion(1, 16458)};
+				ItemLib.createSplashPotion(PotionType.WEAKNESS, false, false, 2)};
 		head = ItemLib.addEnchantments(ItemLib.createItem(Material.SKULL_ITEM, 1, (short) 3, "Troller Head", null), 
 				new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1});
 		armor = new ItemStack[] {ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_BOOTS), Color.BLACK),
@@ -235,7 +237,7 @@ public class Kit {
 		/* Rabbit */
 
 		items = new ItemStack[] {ItemLib.addEnchantments(ItemLib.createItem(Material.CARROT_ITEM, 1, (short) 0, "§cFire §6Carrot", null), 
-				new Enchantment[] {Enchantment.DAMAGE_ALL, Enchantment.FIRE_ASPECT}, new int[] {2, 1})};
+				new Enchantment[] {Enchantment.DAMAGE_ALL, Enchantment.FIRE_ASPECT}, new int[] {2, 2})};
 		armor = new ItemStack[] {ItemLib.addEnchantments(ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_BOOTS), Color.WHITE), 
 				new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1}),
 				ItemLib.addEnchantments(ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.WHITE), 
@@ -245,14 +247,14 @@ public class Kit {
 				ItemLib.addEnchantments(ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.WHITE), 
 						new Enchantment[] {Enchantment.PROTECTION_ENVIRONMENTAL}, new int[] {1})};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.JUMP, (int) MiscellaneousUtils.calculateTicks(3600), 2),
-				new PotionEffect(PotionEffectType.SPEED, (int) MiscellaneousUtils.calculateTicks(3600), 1)};
+				new PotionEffect(PotionEffectType.SPEED, (int) MiscellaneousUtils.calculateTicks(3600), 2)};
 		Kit rabbit = new Kit("Rabbit", items, armor, effects, PvPBoxKitIcon.rabbitKit, (byte)4, (byte)4, (byte)4, (byte)6);
 		kits.add(rabbit);
 
 		/* Ghost */
 
 		items = new ItemStack[] {ItemLib.addEnchantments(ItemLib.createItem(Material.BONE, 1, (short) 0, ChatColor.DARK_GRAY + "Os du spectre", null), 
-				new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {3}), ItemLib.createPotion(3, 16460)};
+				new Enchantment[] {Enchantment.DAMAGE_ALL}, new int[] {3}), ItemLib.createSplashPotion(PotionType.INSTANT_DAMAGE, false, false, 3)};
 		armor = new ItemStack[] {};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.INVISIBILITY, (int) MiscellaneousUtils.calculateTicks(3600), 0)};
 		Kit ghost = new Kit("Fantôme", items, armor, effects, PvPBoxKitIcon.ghostKit, (byte)4, (byte)1, (byte)5, (byte)5);
@@ -284,7 +286,7 @@ public class Kit {
 
 		items = new ItemStack[] {ItemLib.addDisplayName(new ItemStack(Material.STONE_SWORD), "Sabre"), 
 				ItemLib.addDisplayName(new ItemStack(Material.GOLD_HOE), "Vieux Révolver"), 
-				ItemLib.addDisplayName(ItemLib.createPotion(2, 8261), "§aAntidote du scorbut")};
+				ItemLib.addDisplayName(ItemLib.createPotion(PotionType.INSTANT_HEAL, false, false, 2), "§aAntidote du scorbut")};
 		armor = new ItemStack[] {new ItemStack(Material.AIR), ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_LEGGINGS), Color.BLACK),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_CHESTPLATE), Color.RED),
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLACK)};
@@ -353,7 +355,9 @@ public class Kit {
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(null);
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20D);
+		p.setHealth(20D);
 		PvPBoxCore.players.remove(p);
+		p.teleport(PvPBoxConfig.getLobbyLocation());
 	}
 
 	public static Kit getKitByName(String kit) {

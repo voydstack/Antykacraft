@@ -68,8 +68,20 @@ public class ItemLib extends JavaPlugin {
 		return armor;
 	}
 	
-	public static ItemStack createPotion(int amount, int data) {
-		return new ItemStack(Material.POTION, amount, (short) data);
+	public static ItemStack createPotion(PotionType type, boolean extend, boolean upgraded, int amount) {
+		ItemStack potion = new ItemStack(Material.POTION, amount);
+		PotionMeta meta = (PotionMeta) potion.getItemMeta();
+		meta.setBasePotionData(new PotionData(type, extend, upgraded));
+		potion.setItemMeta(meta);
+		return potion;
+	}
+	
+	public static ItemStack createSplashPotion(PotionType type, boolean extend, boolean upgraded, int amount) {
+		ItemStack potion = new ItemStack(Material.SPLASH_POTION, amount);
+		PotionMeta meta = (PotionMeta) potion.getItemMeta();
+		meta.setBasePotionData(new PotionData(type, extend, upgraded));
+		potion.setItemMeta(meta);
+		return potion;
 	}
 	
 	@SuppressWarnings("deprecation")

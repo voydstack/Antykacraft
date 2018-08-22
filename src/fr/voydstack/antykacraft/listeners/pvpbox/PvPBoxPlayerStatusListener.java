@@ -1,6 +1,5 @@
 package fr.voydstack.antykacraft.listeners.pvpbox;
 
-import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 
 import fr.voydstack.antykacraft.Antykacraft;
@@ -32,6 +32,15 @@ public class PvPBoxPlayerStatusListener implements Listener {
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20D);
 		p.setScoreboard(Antykacraft.scoreboardHandler.getScoreboardManager().getMainScoreboard());
 	}
+	
+	@EventHandler
+	public void playerRespawn(PlayerRespawnEvent e) {
+		Player p = e.getPlayer();
+		if(PvPBoxCore.players.containsKey(p)) {
+			Kit.resetPvPBoxPlayer(p);
+			e.setRespawnLocation(PvPBoxConfig.getLobbyLocation());
+		}
+	}
 
 	@EventHandler
 	public void playerDeath(PlayerDeathEvent e) {
@@ -45,11 +54,7 @@ public class PvPBoxPlayerStatusListener implements Listener {
 						PvPBoxCore.playerKill(p.getKiller());
 					} catch(NullPointerException npe) {}
 					finally {
-						String deathMessage = e.getDeathMessage();
 						e.setDeathMessage("");
-						for(Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers())
-							pl.sendMessage(deathMessage);
-						Kit.resetPvPBoxPlayer(p);
 					}
 				}
 			}

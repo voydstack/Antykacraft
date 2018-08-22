@@ -112,20 +112,10 @@ public class KitAbility {
 		};
 	}
 
-	/* Pyromane */
-
-	public static RightAbility crache() {
-		return new RightAbility(15) {
-			public void run(Player p) {
-
-			}
-		};
-	}
-
 	/* Bomberman */
 
 	public static RightAbility bomb() {
-		return new RightAbility(2) {
+		return new RightAbility(3) {
 			public void run(final Player p) {
 				final FallingBlock tnt = p.getWorld().spawnFallingBlock(p.getEyeLocation(), new MaterialData(Material.TNT));
 				tnt.setVelocity(p.getLocation().getDirection().multiply(1.35D));
@@ -161,7 +151,7 @@ public class KitAbility {
 						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
 							if (!p.equals(pl)) {
 								if (!it.isDead()) {
-									if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
+									if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
 										pl.damage(8D);
 										it.remove();
 										cancel();
@@ -197,7 +187,7 @@ public class KitAbility {
 						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
 							if (!p.equals(pl)) {
 								if (!i.isDead()) {
-									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
+									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.5D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.ENTITY_SLIME_SQUISH, 1.0F, 1.2F);
 										pl.damage(4D);
 										i.remove();
@@ -225,7 +215,7 @@ public class KitAbility {
 	/* Enderman */
 
 	public static RightAbility teleporter() {
-		return new RightAbility(4) {
+		return new RightAbility(5) {
 			public void run(final Player p) {
 				final Item it = p.getWorld().dropItem(p.getEyeLocation(), new ItemStack(Material.MAGMA_CREAM));
 				it.setPickupDelay(9999);
@@ -281,8 +271,7 @@ public class KitAbility {
 							if (!p.equals(pl)) {
 								if (!i.isDead()) {
 									if (i.getLocation().distanceSquared(pl.getEyeLocation()) <= 1D) {
-										p.sendMessage(Constants.PVPBOX_PREFIX + "§e§lHEADSHOT");
-										pl.sendMessage(Constants.PVPBOX_PREFIX + "§e§lHEADSHOT");
+										p.sendMessage(Constants.PVPBOX_PREFIX + "§e§lHEADSHOT sur §c" + pl.getName());
 										pl.damage(8D);
 										i.remove();
 										cancel();
@@ -322,7 +311,7 @@ public class KitAbility {
 						for (Player pl : PvPBoxCore.players.keySet()) {
 							if (!p.equals(pl)) {
 								if(!i.isDead()) {
-									if (MiscellaneousUtils.isOnSameBlock(i, pl)) {
+									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.5D && i.getLocation().distanceSquared(pl.getEyeLocation()) > 1.5D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.BLOCK_WOODEN_TRAPDOOR_CLOSE, 1.0F, 1.2F);
 										pl.damage(4D);
 										new Effect(EffectType.STUN).active(pl, 1);
