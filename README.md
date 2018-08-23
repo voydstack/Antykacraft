@@ -106,9 +106,9 @@ Mini-jeu PvP avec des kits de combats.
     * /pvpbox multiplier: antykacraft.pvpbox.multiplier
     * /pvpbox multiplier [valeur]: antykacraft.pvpbox.multiplier.set
     
-#### /pvpbox killreward <valeur>
+#### /pvpbox killreward [valeur]
    - Description: Définit le nombre de points de victoire gagnés par kills.
-   - Utilisation: /pvpbox killreward <valeur>
+   - Utilisation: /pvpbox killreward [valeur]
    - Permission: antykacraft.pvpbox.killreward.set
  
 #### /pvpbox mostplayed
@@ -121,19 +121,19 @@ Mini-jeu PvP avec des kits de combats.
   - Utilisation: /pvpbox lessplayed
   - Permission: antykacraft.pvpbox.kit.lessplayed
 
-#### /pvpbox create <arène>
+#### /pvpbox create [arène]
   - Description: Crée une arène PvPBox (à la position de l'opérateur).
-  - Utilisation: /pvpbox create <nom de l'arène>
+  - Utilisation: /pvpbox create [arène]
   - Permission: antykacraft.pvpbox.create
   
-#### /pvpbox setdefault <arène>
+#### /pvpbox setdefault [arène]
   - Description: Définit l'arène PvPBox par défaut.
-  - Utilisation: /pvpbox setdefault <nom de l'arène>
+  - Utilisation: /pvpbox setdefault [arène]
   - Permission: antykacraft.pvpbox.setdefault
 
-#### /pvpbox remove <arène>
+#### /pvpbox remove [arène]
   - Description: Supprime une arène PvPBox.
-  - Utilisation: /pvpbox remove <nom de l'arène>
+  - Utilisation: /pvpbox remove [arène]
   - Permission: antykacraft.pvpbox.remove
   
 #### /pvpbox kits [args]
@@ -142,23 +142,123 @@ Mini-jeu PvP avec des kits de combats.
     * /pvpbox kits buyable: Rend gratuit tous les kits spéciaux.
     * /pvpbox kits buy: Ouvre le magasin de kits spéciaux.
     * /pvpbox kits list: Affiche la liste des kits PvPbox.
-    * /pvpbox kits enable <kit>: Active un kit PvPBox.
-    * /pvpbox kits disable <kit>: Désactive un kit PvPBox.
-    * /pvpbox kits price <kit> <prix>: Définit le prix d'un kit.
+    * /pvpbox kits enable [kit]: Active un kit PvPBox.
+    * /pvpbox kits disable [kit]: Désactive un kit PvPBox.
+    * /pvpbox kits price [kit] [prix]: Définit le prix d'un kit.
   - Permissions:
     * /pvpbox kits buyable: antykacraft.pvpbox.kit.buyable
     * /pvpbox kits buy: antykacraft.pvpbox.kit.buy
     * /pvpbox kits list: antykacraft.pvpbox.kit.list
-    * /pvpbox kits enable <kit>: antykacraft.pvpbox.kit.enable
-    * /pvpbox kits disable <kit>: antykacraft.pvpbox.kit.disable
-    * /pvpbox kits price <kit> <prix>: antykacraft.pvpbox.kit.price
+    * /pvpbox kits enable [kit]: antykacraft.pvpbox.kit.enable
+    * /pvpbox kits disable [kit]: antykacraft.pvpbox.kit.disable
+    * /pvpbox kits price [kit] [prix]: antykacraft.pvpbox.kit.price
  
 > ###### (!) Les commande suivantes ne sont pas executables par les joueurs
 
-###### /pvpbox <joueur>
+###### /pvpbox [joueur]
   - Description: Ouvre la liste des kits au joueur spécifié.
-  - Utilisation: /pvpbox <joueur> (@p pour les command blocks)
+  - Utilisation: /pvpbox [joueur] (@p pour les command blocks)
 
-###### /pvpbox lobby <joueur>
+###### /pvpbox lobby [joueur]
   - Description: Téléporte le joueur spécifié au lobby PvPBox.
-  - Utilisation: /pvpbox lobby <joueur>
+  - Utilisation: /pvpbox lobby [joueur]
+ 
+## Kits
+
+#### Guerrier
+  - Description: Incarnez l'âme d'un guerrier.
+  - Equipement:
+    * Epée en fer
+    * Plastron en fer
+    * Jambières en fer
+    * Bottes en  or
+
+### Archer
+  - Description: Mettez votre précision à l'épreuve.
+  - Equipement:
+    * Epée en bois
+    * Arc [Infinity]
+    * Salve
+    * Plastron en or
+    * Jambières en or
+    * Bottes en or
+  - Compétences:
+    * Salve: Lance une salve de flèches enflammées sur le champ de bataille.
+    
+### Reaper
+  - Description: Maudissez vos adversaires.
+  - Equipement:
+    * Faux [Sharpness IV]
+    * Potion de force II
+    * Potion splash de poison II
+    * Plastron en diamant
+    * Jambières en cuir
+    * Bottes en cuir
+
+### Wizard
+  - Description: Jouez avec la magie noire.
+  - Equipement:
+    * Pelle en fer [Sharpness IV]
+    * Potion de force I
+    * Potion de vitesse allongée
+    * Potion de soins II
+    * Potion de régéneration II
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+    
+### Trolleur
+  - Description: Faites ragequit vos adversaires.
+  - Equipement:
+    * Stick of truth [Knockback III, Sharpness II]
+    * 64x2 Boule de neiges
+    * 2x Potion splash de faiblesse
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+
+### Ninja
+  - Description: Combattez furtivement.
+  - Equipement:
+    * Katana (Epée en pierre) [Sharpness I, Knockback I]
+    * Shuriken
+    * Casque en cuir
+    * Plastron en cuir
+    * Jambières en cuir
+    * Bottes en cuir
+  - Effets:
+    * Speed I (infini)
+  - Compétences:
+    * Shuriken: Lance un shuriken (3.5 dégats)
+
+### Tank
+  - Description: Encaissez tous les dégâts.
+  - Equipement:
+    * Hâche de bourrin
+    * Casque en cuir [Protection I]
+    * Plastron en diamant [Protection I]
+    * Jambières en diamant [Protection I]
+    * Bottes en diamant [Protection I]
+  - Effets:
+    * 16 coeurs
+    * Slow I
+    
+## Rabbit
+  - Description: Follow the white rabbit.
+  - Equipement:
+    * Fire Carrot [Sharpness 2, Fire Aspect II]
+    * Casque en cuir [Protection I]
+    * Plastron en cuir [Protection I]
+    * Jambières en cuir [Protection I]
+    * Bottes en cuir [Protection I]
+  - Effets:
+    * Jump II
+    * Speed II
+
+### Ghost
+  - Description: Faufilez vous dans les rangs ennemis.
+  - Equipement:
+    * Os du spectre [Sharpness III]
+    * 3x Potion splash Instants Damage
+  - Effets:
+    * Invibility
