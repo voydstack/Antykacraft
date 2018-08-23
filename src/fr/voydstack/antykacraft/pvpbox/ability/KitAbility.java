@@ -5,8 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -35,12 +37,12 @@ public class KitAbility {
 				i.setVelocity(p.getLocation().getDirection().multiply(2.0D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : i.getNearbyEntities(2D, 2D, 2D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!i.isDead()) {
 									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.ENTITY_SILVERFISH_HURT, 1.0F, 1.2F);
-										pl.damage(7D);
+										((LivingEntity)pl).damage(7D);
 										i.remove();
 										cancel();
 									}
@@ -68,7 +70,7 @@ public class KitAbility {
 		return new RightAbility(10) {
 			public void run(Player p) {
 				float ang = 70F;
-				for(int i = 1; i <= 6; i++) {
+				for(int i = 0; i < 6; i++) {
 					ang += 5;
 					Arrow a = (Arrow) p.launchProjectile(Arrow.class);
 					a.setShooter(p);
@@ -84,18 +86,18 @@ public class KitAbility {
 
 	public static RightAbility golem() {
 		return new RightAbility(6) {
-			public void run(final Player p) {
+			public void run(final Player p) {				
 				final FallingBlock f = p.getWorld().spawnFallingBlock(p.getEyeLocation(), new MaterialData(Material.COBBLESTONE));
 				f.setVelocity(p.getLocation().getDirection().multiply(1.75D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : f.getNearbyEntities(4D, 4D, 4D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!f.isDead()) {
 									if (f.getLocation().distanceSquared(pl.getLocation()) <= 2.5D) {
-										pl.damage(5D);
-										pl.getWorld().playSound(f.getLocation(), Sound.BLOCK_STONE_HIT, 1.0F, 1.35F);
-										pl.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1, 30));
+										((LivingEntity)pl).damage(5D);
+										pl.getWorld().playSound(f.getLocation(), Sound.BLOCK_STONE_BREAK, 2.0F, .5F);
+										((Player)pl).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1, 30));
 										cancel();
 									}
 								} else cancel();
@@ -148,11 +150,11 @@ public class KitAbility {
 				it.setVelocity(p.getLocation().getDirection().multiply(1.85D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : it.getNearbyEntities(2D, 2D, 2D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!it.isDead()) {
 									if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
-										pl.damage(8D);
+										((LivingEntity)pl).damage(8D);
 										it.remove();
 										cancel();
 									}
@@ -184,12 +186,12 @@ public class KitAbility {
 				i.setVelocity(p.getLocation().getDirection().multiply(1.65D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : i.getNearbyEntities(2D, 2D, 2D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!i.isDead()) {
 									if (i.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
 										pl.getWorld().playSound(i.getLocation(), Sound.ENTITY_SLIME_SQUISH, 1.0F, 1.2F);
-										pl.damage(4D);
+										((LivingEntity)pl).damage(4D);
 										i.remove();
 										cancel();
 									}
@@ -223,17 +225,17 @@ public class KitAbility {
 				it.setVelocity(p.getLocation().getDirection().multiply(2D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : it.getNearbyEntities(2D, 2D, 2D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!it.isDead()) {
 									if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
-										pl.damage(2D);
+										((LivingEntity)pl).damage(2D);
 										Location a = p.getLocation();
 										Location b = pl.getLocation();
 										p.teleport(b);
 										pl.teleport(a);
 										p.getWorld().playSound(p.getEyeLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
-										p.getWorld().playSound(pl.getEyeLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
+										p.getWorld().playSound(((Player)pl).getEyeLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
 										it.remove();
 										cancel();
 									} 
@@ -267,17 +269,18 @@ public class KitAbility {
 				i.setVelocity(p.getLocation().getDirection().multiply(2D));
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : Bukkit.getWorld(PvPBoxCore.eventWorld).getPlayers()) {
-							if (!p.equals(pl)) {
+						for (Entity pl : i.getNearbyEntities(2D, 2D, 2D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if (!i.isDead()) {
-									if (i.getLocation().distanceSquared(pl.getEyeLocation()) <= 1D) {
+									if (i.getLocation().distanceSquared(((Player)pl).getEyeLocation()) <= 1D) {
 										p.sendMessage(Constants.PVPBOX_PREFIX + "§e§lHEADSHOT sur §c" + pl.getName());
-										pl.damage(8D);
+										((LivingEntity)pl).damage(8D);
 										i.remove();
 										cancel();
 									} else {
 										if(i.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
-											pl.damage(3D);
+											((LivingEntity)pl).damage(4D);
+											pl.getWorld().playSound(i.getLocation(), Sound.BLOCK_SLIME_BREAK, 1.0F, 1.2F);
 											i.remove();
 											cancel();
 										}
@@ -308,13 +311,13 @@ public class KitAbility {
 				i.setVelocity(p.getLocation().getDirection());
 				new BukkitRunnable() {
 					public void run() {
-						for (Player pl : PvPBoxCore.players.keySet()) {
-							if (p.equals(pl)) {
+						for (Entity pl : i.getNearbyEntities(4D, 4D, 4D)) {
+							if (pl instanceof Player && !p.equals(pl)) {
 								if(!i.isDead()) {
 									if (MiscellaneousUtils.isOnSameBlock(i, pl)) {
 										pl.getWorld().playSound(i.getLocation(), Sound.BLOCK_WOODEN_TRAPDOOR_CLOSE, 1.0F, 1.2F);
-										pl.damage(4D);
-										new Effect(EffectType.STUN).active(pl, 1);
+										((LivingEntity)pl).damage(4D);
+										new Effect(EffectType.STUN).active((Player) pl, 1);
 										pl.sendMessage(Constants.PVPBOX_PREFIX + "§c§lSTUN (1s)");
 										i.remove();
 										cancel();
@@ -337,10 +340,9 @@ public class KitAbility {
 
 	public static RightAbility razorBlade() {
 		return new RightAbility(6) {
-			@SuppressWarnings("deprecation")
 			public void run(final Player p) {
 				p.removePotionEffect(PotionEffectType.INVISIBILITY);
-				Bukkit.getScheduler().runTaskTimer(Antykacraft.instance, new BukkitRunnable() {
+				new BukkitRunnable() {
 					int i = 0;
 					float angle = 60F;
 					public void run() {
@@ -351,17 +353,22 @@ public class KitAbility {
 							it.setVelocity(MiscellaneousUtils.setAngle(p, angle, 2.5D));
 							new BukkitRunnable() {
 								public void run() {
-									for (Player pl : PvPBoxCore.players.keySet()) {
-										if (!p.equals(pl)) {
-											if(!it.isDead()) {
-												if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.65D) {
-													pl.getWorld().playSound(it.getLocation(), Sound.ENTITY_ARROW_HIT, 1.0F, 1.2F);
-													pl.damage(2D);
+									for (Entity pl : it.getNearbyEntities(2D, 2D, 2D)) {
+										if (pl instanceof Player && !p.equals(pl)) {
+											if (!it.isDead()) {
+												if (it.getLocation().distanceSquared(pl.getLocation()) <= 1.75D) {
+													pl.getWorld().playSound(it.getLocation(), Sound.BLOCK_SLIME_BREAK, 1.0F, 1.2F);
+													((LivingEntity)pl).damage(4D);
 													it.remove();
 													cancel();
 												}
 											} else cancel();
 										}
+									}
+									if(it.isOnGround()) {
+										p.getWorld().playSound(it.getLocation(), Sound.ITEM_HOE_TILL, 1.0F, 1.2F);
+										it.remove();
+										cancel();
 									}
 								}
 							}.runTaskTimer(Antykacraft.instance, 0L, 1L);
@@ -373,7 +380,7 @@ public class KitAbility {
 							}, 100L);
 						}
 					}
-				}, 0L, 1L);
+				}.runTaskTimer(Antykacraft.instance, 0L, 2L);
 			}
 		};
 	}
@@ -389,7 +396,7 @@ public class KitAbility {
 							p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, MiscellaneousUtils.calculateTicks(15), 1));
 						}
 					}
-				}, 60L);
+				}, 50L);
 			}
 		};
 	}

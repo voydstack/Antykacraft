@@ -38,7 +38,8 @@ public class PvPBoxPlayerStatusListener implements Listener {
 		Player p = e.getPlayer();
 		if(PvPBoxCore.players.containsKey(p)) {
 			Kit.resetPvPBoxPlayer(p);
-			e.setRespawnLocation(PvPBoxConfig.getLobbyLocation());
+			p.getInventory().clear();
+			p.teleport(PvPBoxConfig.getLobbyLocation());
 		}
 	}
 

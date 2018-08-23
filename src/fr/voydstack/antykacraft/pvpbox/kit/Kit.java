@@ -196,7 +196,7 @@ public class Kit {
 
 		/* Trolleur */
 
-		ItemStack trollerStick = ItemLib.addEnchantments(ItemLib.createItem(Material.STICK, 1, (short) 0, "§dTroller Stick", null), 
+		ItemStack trollerStick = ItemLib.addEnchantments(ItemLib.createItem(Material.STICK, 1, (short) 0, "§dStick of truth", null), 
 				new Enchantment[] {Enchantment.KNOCKBACK, Enchantment.DAMAGE_ALL}, new int[] {3, 2});
 		items = new ItemStack[] {new ItemStack(Material.SNOW_BALL, 64), new ItemStack(Material.SNOW_BALL, 64), trollerStick, 
 				ItemLib.createSplashPotion(PotionType.WEAKNESS, false, false, 2)};
@@ -229,8 +229,7 @@ public class Kit {
 				new ItemStack(Material.DIAMOND_LEGGINGS), 
 				new ItemStack(Material.DIAMOND_CHESTPLATE), 
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLUE)};
-		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.SLOW, (int) MiscellaneousUtils.calculateTicks(3600), 1),
-				new PotionEffect(PotionEffectType.WEAKNESS, (int) MiscellaneousUtils.calculateTicks(3600), 0)};
+		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.SLOW, (int) MiscellaneousUtils.calculateTicks(3600), 1)};
 		Kit tank = new Kit("Tank", items, armor, effects, 32D, PvPBoxKitIcon.tankKit, (byte)2, (byte)8, (byte)1, (byte)2);
 		kits.add(tank);
 

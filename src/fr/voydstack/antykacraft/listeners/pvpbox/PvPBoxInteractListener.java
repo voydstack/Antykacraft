@@ -25,12 +25,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 
 import fr.voydstack.antykacraft.pvpbox.PvPBoxCore;
 import fr.voydstack.antykacraft.pvpbox.effect.Effect;
 import fr.voydstack.antykacraft.pvpbox.effect.EffectType;
 import fr.voydstack.antykacraft.utils.MiscellaneousUtils;
 
+@SuppressWarnings("deprecation")
 public class PvPBoxInteractListener implements Listener {
 	private List<Material> allowClick = new ArrayList<Material>();
 	public static List<Player> explosionImmunity = new ArrayList<Player>();
@@ -97,9 +100,18 @@ public class PvPBoxInteractListener implements Listener {
 			e.setCancelled(true);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void playerPickupArrow(PlayerPickupArrowEvent e) {
+		Player p = e.getPlayer();
+		if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+			if(PvPBoxCore.players.containsKey(p)) {
+				e.setCancelled(true);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void playerPickupDrop(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
 		if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
 			if(PvPBoxCore.players.containsKey(p)) {
@@ -166,7 +178,7 @@ public class PvPBoxInteractListener implements Listener {
 						if(en.isOnGround()) {
 							Location player = e.getPlayer().getLocation();
 							Location hook = en.getLocation();
-							e.getPlayer().setVelocity(MiscellaneousUtils.getVectorToLocationFast(player, hook, 2.75D));
+							e.getPlayer().setVelocity(MiscellaneousUtils.getVectorToLocationFast(player, hook, 2D));
 							break;
 						}
 					}
@@ -215,6 +227,16 @@ public class PvPBoxInteractListener implements Listener {
 		if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
 			if(PvPBoxCore.players.containsKey(p)) {
 				e.setDamage(0);
+				e.setCancelled(true);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void preventSwap(PlayerSwapHandItemsEvent e) {
+		Player p = e.getPlayer();
+		if(p.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+			if(PvPBoxCore.players.containsKey(p)) {
 				e.setCancelled(true);
 			}
 		}

@@ -59,17 +59,12 @@ public class FactionCommand implements CommandExecutor {
 	public static void sendFactionMessage(Player player, String message) {
 		Team playerTeam = Antykacraft.scoreboardHandler.getTeamsHandler().getPlayerTeam(player);
 		for(String name : playerTeam.getEntries()) {
-			Player dest = Bukkit.getPlayer(name);
-			if(dest.isOnline()) {
-				String dispName = player.getName();
-				try {
-					dispName = player.getDisplayName();
-				} catch(NullPointerException npe) {
-					dispName = player.getName();
-				} finally {
-					dest.sendMessage("§6["+playerTeam.getDisplayName()+"] §r" + dispName + " > "+message);
+			try {
+				Player dest = Bukkit.getPlayer(name);
+				if(dest.isOnline()) {
+					dest.sendMessage("§6[" + playerTeam.getDisplayName()+"] §r" + player.getDisplayName() + " > "+message);
 				}
-			}
+			} catch(NullPointerException npe) {}
 		}
 	}
 }
