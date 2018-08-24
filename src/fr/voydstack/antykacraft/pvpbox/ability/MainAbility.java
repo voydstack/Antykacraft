@@ -7,7 +7,7 @@ interface IRightAbility {
 } 
 
 interface IHitAbility {
-	public void run(Player p, Player d, double damage);
+	public void run(Player p, Player d);
 }
 
 interface ILeftAbility {
@@ -16,17 +16,20 @@ interface ILeftAbility {
 
 public abstract class MainAbility {
 	protected long cooldown;
+	protected long time;
+	protected boolean busy = false;
 
-	public MainAbility(long cdTicks) {
-		this.cooldown = cdTicks;
+	public MainAbility(long cooldown) {
+		this.cooldown = cooldown;
+		this.time = 0;
 	}
 
 	public MainAbility(int seconds) {
-		this.cooldown = seconds*20;
+		this(seconds*20L);
 	}
 
 	public MainAbility() {
-		this.cooldown = 0;
+		this(0);
 	}
 
 	public long getCooldown() {
@@ -37,29 +40,79 @@ public abstract class MainAbility {
 		this.cooldown = cooldown;
 	}
 	
+	public long getTime() {
+		return time;
+	}
+	
+	public int getTimeSeconds() {
+		return (int) Math.ceil(time / 20D);
+	}
+	
+	public void setTime(long time) {
+		this.time = time;
+	}
+	
+	public void addTime(long time) {
+		setTime(getTime() + time);
+	}
+	
+	public void addTime(int time) {
+		addTime(time*20L);
+	}
+	
+	public void removeTime(long time) {
+		setTime(getTime() - time);
+	}
+	
+	public void removeTime(int time) {
+		setTime(getTime() - time*20L);
+	}
+	
+	public boolean isBusy() {
+		return busy;
+	}
+	
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+	
+	public void initCooldown() {
+		setTime(getCooldown());
+	}
+	
 	public static abstract class RightAbility extends MainAbility implements IRightAbility {
-		public RightAbility(long cdTicks) {
-			this.cooldown = cdTicks;
-		} public RightAbility(int seconds) {
-			this.cooldown = seconds*20;
-		} public RightAbility() {
-			this.cooldown = 0;
+		public RightAbility(long cooldown) {
+			super(cooldown);
 		}
-	} public static abstract class HitAbility extends MainAbility implements IHitAbility {
-		public HitAbility(long cdTicks) {
-			this.cooldown = cdTicks;
-		} public HitAbility(int seconds) {
-			this.cooldown = seconds*20;
-		} public HitAbility() {
-			this.cooldown = 0;
+		public RightAbility(int cooldown) {
+			super(cooldown);
 		}
-	} public static abstract class LeftAbility extends MainAbility implements ILeftAbility {
-		public LeftAbility(long cdTicks) {
-			this.cooldown = cdTicks;
-		} public LeftAbility(int seconds) {
-			this.cooldown = seconds*20;
-		} public LeftAbility() {
-			this.cooldown = 0;
+		public RightAbility() {
+			super();
+		}
+	} 
+	
+	public static abstract class HitAbility extends MainAbility implements IHitAbility {
+		public HitAbility(long cooldown) {
+			super(cooldown);
+		}
+		public HitAbility(int cooldown) {
+			super(cooldown);
+		}
+		public HitAbility() {
+			super();
+		}
+	} 
+	
+	public static abstract class LeftAbility extends MainAbility implements ILeftAbility {
+		public LeftAbility(long cooldown) {
+			super(cooldown);
+		}
+		public LeftAbility(int cooldown) {
+			super(cooldown);
+		}
+		public LeftAbility() {
+			super();
 		}
 	}
 }

@@ -33,9 +33,7 @@ public class Kit {
 	private String name;
 	private double maxLife;
 	private byte attack, health, magic, difficulty;
-	public HashMap<ItemStack, MainAbility> rightAbilities = new HashMap<ItemStack, MainAbility>();
-	public HashMap<ItemStack, MainAbility> leftAbilities = new HashMap<ItemStack, MainAbility>();
-	public HashMap<ItemStack, MainAbility> hitAbilities = new HashMap<ItemStack, MainAbility>();
+	public HashMap<ItemStack, MainAbility> abilities = new HashMap<ItemStack, MainAbility>();
 
 	public Kit(String name, ItemStack[] items, ItemStack[] armor, PotionEffect[] effects, ItemStack displayItem, byte attack, byte health, byte magic, byte difficulty) {
 		this.setName(name);
@@ -170,7 +168,7 @@ public class Kit {
 				ItemLib.addEnchantments(new ItemStack(Material.GOLD_CHESTPLATE), new Enchantment[] {Enchantment.DURABILITY}, new int[] {127}),
 				head};
 		Kit archer = new Kit("Archer", items, armor, effects, PvPBoxKitIcon.archerKit, (byte)7, (byte)4, (byte)3, (byte)5);
-		archer.rightAbilities.put(items[2], KitAbility.salve());
+		archer.abilities.put(items[2], KitAbility.salve());
 		kits.add(archer);
 
 		/* Reaper */
@@ -219,7 +217,7 @@ public class Kit {
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLACK)};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.SPEED, (int) MiscellaneousUtils.calculateTicks(3600), 0)};
 		Kit ninja = new Kit("Ninja", items, armor, effects, PvPBoxKitIcon.ninjaKit, (byte)7, (byte)4, (byte)4, (byte)7);
-		ninja.rightAbilities.put(items[1], KitAbility.shuriken());
+		ninja.abilities.put(items[1], KitAbility.shuriken());
 		kits.add(ninja);
 
 		/* Tank */
@@ -265,7 +263,7 @@ public class Kit {
 		armor = new ItemStack[] {null, new ItemStack(Material.IRON_LEGGINGS), new ItemStack(Material.IRON_CHESTPLATE), null};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 0, MiscellaneousUtils.calculateTicks(10000))};
 		Kit golem = new Kit("Golem", items, armor, effects, 24D, PvPBoxKitIcon.golemKit, (byte)5, (byte)7, (byte)4, (byte)7);
-		golem.rightAbilities.put(items[1], KitAbility.golem());
+		golem.abilities.put(items[1], KitAbility.golem());
 		kits.add(golem);
 		specialKits.add(golem);
 
@@ -277,7 +275,7 @@ public class Kit {
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.RED)};
 		effects = new PotionEffect[] {};
 		Kit bomberman = new Kit("Bomberman", items, armor, effects, PvPBoxKitIcon.bombermanKit, (byte)3, (byte)4, (byte)6, (byte)5);
-		bomberman.rightAbilities.put(items[1], KitAbility.bomb());
+		bomberman.abilities.put(items[1], KitAbility.bomb());
 		kits.add(bomberman);
 		specialKits.add(bomberman);
 
@@ -291,7 +289,7 @@ public class Kit {
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLACK)};
 		effects = new PotionEffect[] {};
 		Kit pirate = new Kit("Pirate", items, armor, effects, PvPBoxKitIcon.pirateKit, (byte)5, (byte)4, (byte)3, (byte)5);
-		pirate.rightAbilities.put(items[1], KitAbility.revolver());
+		pirate.abilities.put(items[1], KitAbility.revolver());
 		kits.add(pirate);
 		specialKits.add(pirate);
 
@@ -304,7 +302,7 @@ public class Kit {
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.YELLOW)};
 		effects = new PotionEffect[] {};
 		Kit marin = new Kit("Marin", items, armor, effects, PvPBoxKitIcon.fisherKit, (byte)5, (byte)4, (byte)4, (byte)6);
-		marin.rightAbilities.put(items[1], KitAbility.sharpFish());
+		marin.abilities.put(items[1], KitAbility.sharpFish());
 		kits.add(marin);
 		specialKits.add(marin);
 
@@ -316,7 +314,7 @@ public class Kit {
 				ItemLib.colorLeatherArmor(new ItemStack(Material.LEATHER_HELMET), Color.BLACK)};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.INCREASE_DAMAGE,  (int) MiscellaneousUtils.calculateTicks(3600), 10), new PotionEffect(PotionEffectType.SPEED, MiscellaneousUtils.calculateTicks(3600), 1)};
 		Kit enderman = new Kit("Enderman", items, armor, effects, PvPBoxKitIcon.endermanKit, (byte)6, (byte)4, (byte)5, (byte)7);
-		enderman.rightAbilities.put(items[1], KitAbility.teleporter());
+		enderman.abilities.put(items[1], KitAbility.teleporter());
 		kits.add(enderman);
 		specialKits.add(enderman);
 		
@@ -327,8 +325,8 @@ public class Kit {
 		armor = new ItemStack[] {new ItemStack(Material.LEATHER_BOOTS), null, new ItemStack(Material.LEATHER_CHESTPLATE), null};
 		effects = new PotionEffect[] {new PotionEffect(PotionEffectType.NIGHT_VISION, (int) MiscellaneousUtils.calculateTicks(3600), 2)};
 		Kit chasseur = new Kit("Chasseur", items, armor, effects, PvPBoxKitIcon.hunterKit, (byte)6, (byte)3, (byte)4, (byte)5);
-		chasseur.rightAbilities.put(items[1], KitAbility.trap());
-		chasseur.rightAbilities.put(items[0], KitAbility.huntKnife());
+		chasseur.abilities.put(items[1], KitAbility.trap());
+		chasseur.abilities.put(items[0], KitAbility.huntKnife());
 		kits.add(chasseur);
 		specialKits.add(chasseur);
 		
@@ -340,8 +338,8 @@ public class Kit {
 		armor = new ItemStack[] {null, null, null, null};
 		effects = new PotionEffect[] {};
 		Kit assassin = new Kit("Assassin", items, armor, effects, 16D, PvPBoxKitIcon.assassinKit, (byte)8, (byte)1, (byte)5, (byte)5);
-		assassin.rightAbilities.put(items[1], KitAbility.razorBlade());
-		assassin.rightAbilities.put(items[2], KitAbility.invisibility());
+		assassin.abilities.put(items[1], KitAbility.razorBlade());
+		assassin.abilities.put(items[2], KitAbility.invisibility());
 		kits.add(assassin);
 		specialKits.add(assassin);
 	}

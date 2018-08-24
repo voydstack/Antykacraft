@@ -49,6 +49,7 @@ public class PvPBoxPlayerStatusListener implements Listener {
 			Player p = (Player) e.getEntity();
 			if(p.getWorld().getName().equals(PvPBoxCore.eventWorld)) {
 				if(PvPBoxCore.players.containsKey(p)) {
+					e.setDroppedExp(0);
 					PvPBoxCore.playerDeath(p);	
 					p.teleport(PvPBoxConfig.getLobbyLocation());
 					try {

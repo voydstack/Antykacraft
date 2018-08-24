@@ -1,70 +1,72 @@
 package fr.voydstack.antykacraft.listeners.pvpbox;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 
 import fr.voydstack.antykacraft.Antykacraft;
 import fr.voydstack.antykacraft.pvpbox.PvPBoxCore;
 import fr.voydstack.antykacraft.pvpbox.ability.MainAbility;
 import fr.voydstack.antykacraft.pvpbox.ability.MainAbility.HitAbility;
+import fr.voydstack.antykacraft.pvpbox.ability.MainAbility.LeftAbility;
 import fr.voydstack.antykacraft.pvpbox.ability.MainAbility.RightAbility;
 import fr.voydstack.antykacraft.pvpbox.kit.Kit;
+import fr.voydstack.antykacraft.pvpbox.runnable.PvPBoxCooldownRunnable;
 import fr.voydstack.antykacraft.utils.Constants;
 
 public class PvPBoxAbilityListener implements Listener {
 	@EventHandler
 	public void rightAbility(PlayerInteractEvent e) {
-		final Player p = e.getPlayer();
+		Player p = e.getPlayer();
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(p.getWorld().getName().equals(PvPBoxCore.eventWorld)) {
 				if(PvPBoxCore.players.containsKey(p)) {
 					try {
 						ItemStack iHand = e.getItem();
 						Kit k = PvPBoxCore.players.get(p);
-						final RightAbility ability = (RightAbility)k.rightAbilities.get(iHand);
-						if(PvPBoxCore.cooldowns.containsKey(p)) {
-							List<MainAbility> cooldowns = PvPBoxCore.cooldowns.get(p);
-							if(!cooldowns.contains(ability)) {
+						if(k.abilities.get(iHand) instanceof RightAbility) {
+							RightAbility ability = (RightAbility)k.abilities.get(iHand);
+							if(ability.getTime() == 0L && !ability.isBusy()) { // Si le sort est disponible
+								ability.initCooldown();
 								ability.run(p);
-								cooldowns.add(ability);
-								PvPBoxCore.cooldowns.remove(p);
-								PvPBoxCore.cooldowns.put(p, cooldowns);
-								Bukkit.getScheduler().runTaskLater(Antykacraft.instance, new Runnable() {
-									public void run() {
-										List<MainAbility> abilities = PvPBoxCore.cooldowns.get(p);
-										abilities.remove(ability);
-										PvPBoxCore.cooldowns.remove(p);
-										PvPBoxCore.cooldowns.put(p, abilities);
-									}
-								}, k.rightAbilities.get(iHand).getCooldown());
+								ability.setBusy(true);
+								new PvPBoxCooldownRunnable(p, iHand).runTaskTimer(Antykacraft.instance, 0L, 1L);
 							} else {
-								p.sendMessage(Constants.PVPBOX_PREFIX + "§eSort en cours de rechargement");
+								p.sendMessage(Constants.PVPBOX_PREFIX + "§eLe sort est en cours de rechargement ... (§l"+ability.getTimeSeconds()+"§r§es)");
 							}
-						} else {
-							ability.run(p);
-							List<MainAbility> cooldowns = new ArrayList<MainAbility>();
-							cooldowns.add(ability);
-							PvPBoxCore.cooldowns.put(p, cooldowns);
-							Bukkit.getScheduler().runTaskLater(Antykacraft.instance, new Runnable() {
-								public void run() {
-									List<MainAbility> abilities = PvPBoxCore.cooldowns.get(p);
-									abilities.remove(ability);
-									PvPBoxCore.cooldowns.remove(p);
-									PvPBoxCore.cooldowns.put(p, abilities);
-								}
-							}, k.rightAbilities.get(iHand).getCooldown());
 						}
-					} catch(NullPointerException ex) {}
+					} catch(NullPointerException npe) {}
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void leftAbility(PlayerInteractEvent e) {
+		Player p = e.getPlayer();
+		if(e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+			if(p.getWorld().getName().equals(PvPBoxCore.eventWorld)) {
+				if(PvPBoxCore.players.containsKey(p)) {
+					try {
+						ItemStack iHand = e.getItem();
+						Kit k = PvPBoxCore.players.get(p);
+						if(k.abilities.get(iHand) instanceof LeftAbility) {
+							LeftAbility ability = (LeftAbility)k.abilities.get(iHand);
+							if(ability.getTime() == 0L && !ability.isBusy()) { // Si le sort est disponible
+								ability.initCooldown();
+								ability.run(p);
+								ability.setBusy(true);
+								new PvPBoxCooldownRunnable(p, iHand).runTaskTimer(Antykacraft.instance, 0L, 1L);
+							} else {
+								p.sendMessage(Constants.PVPBOX_PREFIX + "§eLe sort est en cours de rechargement ... (§l"+ability.getTimeSeconds()+"§r§es)");
+							}
+						}
+					} catch(NullPointerException npe) {}
 				}
 			}
 		}
@@ -72,54 +74,45 @@ public class PvPBoxAbilityListener implements Listener {
 
 	@EventHandler
 	public void hitAbility(EntityDamageByEntityEvent e) {
-		if(e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
-			final Player p = (Player)e.getDamager();
-			final Player d = (Player)e.getEntity();
-			if(PvPBoxCore.players.containsKey(p) && PvPBoxCore.players.containsKey(d)) {
-				try {
-					ItemStack iHand = p.getInventory().getItemInMainHand();
-					Kit k = PvPBoxCore.players.get(p);
-					final HitAbility ability = (HitAbility)k.hitAbilities.get(iHand);
-					if(PvPBoxCore.cooldowns.containsKey(p)) {
-						List<MainAbility> cooldowns = PvPBoxCore.cooldowns.get(p);
-						if(!cooldowns.contains(ability)) {
-							ability.run(p, d, e.getDamage());
-							cooldowns.add(ability);
-							PvPBoxCore.cooldowns.remove(p);
-							PvPBoxCore.cooldowns.put(p, cooldowns);
-							Bukkit.getScheduler().scheduleSyncDelayedTask(Antykacraft.instance, new Runnable() {
-								public void run() {
-									List<MainAbility> abilities = PvPBoxCore.cooldowns.get(p);
-									abilities.remove(ability);
-									PvPBoxCore.cooldowns.remove(p);
-									PvPBoxCore.cooldowns.put(p, abilities);
-								}
-							}, k.hitAbilities.get(iHand).getCooldown());
-						} else {
-							p.sendMessage(Constants.PVPBOX_PREFIX + "§eSort en cours de rechargement");
-						}
-					} else {
-						List<MainAbility> cooldowns = new ArrayList<MainAbility>();
-						ability.run(p, d, e.getDamage());
-						cooldowns.add(ability);
-						PvPBoxCore.cooldowns.put(p, cooldowns);
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Antykacraft.instance, new Runnable() {
-							public void run() {
-								List<MainAbility> abilities = PvPBoxCore.cooldowns.get(p);
-								abilities.remove(ability);
-								PvPBoxCore.cooldowns.remove(p);
-								PvPBoxCore.cooldowns.put(p, abilities);
+		if(e.getEntity() instanceof Player && e.getEntity() instanceof Player) {
+			Player entity = (Player) e.getEntity();
+			Player damager = (Player) e.getDamager();
+			if(entity.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld) && 
+					damager.getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+				if(PvPBoxCore.players.containsKey(damager) && PvPBoxCore.players.containsKey(entity)) {
+					try {
+						ItemStack iHand = damager.getInventory().getContents()[damager.getInventory().getHeldItemSlot()];
+						Kit k = PvPBoxCore.players.get(damager);
+						if(k.abilities.get(iHand) instanceof HitAbility) {
+							HitAbility ability = (HitAbility) k.abilities.get(iHand);
+							if(ability.getTime() == 0L && !ability.isBusy()) {
+								ability.initCooldown();
+								ability.run(damager, entity);
+								ability.setBusy(true);
+								new PvPBoxCooldownRunnable(damager, iHand).runTaskTimer(Antykacraft.instance, 0L, 1L);
 							}
-						}, k.hitAbilities.get(iHand).getCooldown());
-					}
-				} catch(Exception ex) {}
-				finally {
-					if(PvPBoxCore.players.get(p).getName() == "Assassin") {
-						if(p.getPotionEffect(PotionEffectType.INVISIBILITY) != null) {
-							e.setDamage(e.getDamage() + 4D);
-							p.removePotionEffect(PotionEffectType.INVISIBILITY);
 						}
+					} catch(NullPointerException npe) {}
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void playerHeldItem(PlayerItemHeldEvent e) {
+		if(e.getPlayer().getWorld().getName().equalsIgnoreCase(PvPBoxCore.eventWorld)) {
+			Player p = e.getPlayer();
+			if(PvPBoxCore.players.containsKey(p)) {
+				ItemStack heldItem = p.getInventory().getContents()[e.getNewSlot()];
+				if(PvPBoxCore.players.get(p).abilities.containsKey(heldItem)) {
+					MainAbility ability = PvPBoxCore.players.get(p).abilities.get(heldItem);
+					if(ability.getTimeSeconds() > 0 && ability.isBusy()) {
+						new PvPBoxCooldownRunnable.WatchRunnable(p, heldItem).runTaskTimer(Antykacraft.instance, 0L, 1L);
+					} else {
+						p.setLevel(0);
 					}
+				} else {
+					p.setLevel(0);
 				}
 			}
 		}

@@ -63,7 +63,6 @@ public class PvPBoxCore {
 	public static void playerKill(Player p) {
 		try {
 			if(p.getWorld().getName().equals(eventWorld)) {
-				p.setLevel(p.getLevel() + 1);
 				PvPBoxConfig.addKill(p);
 			}
 		} catch(NullPointerException npe) {}
